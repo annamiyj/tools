@@ -1,0 +1,191 @@
+{% extends "base.html" %}
+
+{%block title%}
+    ZX Tools
+{%endblock%}
+
+{%block myContent%}
+{{block.super}}
+<script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
+<script src="http://libs.baidu.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
+<div class="templatemo-content-container">
+    <div class="col-lg-12">
+            <h1 class="page-header">五折新用户白名单</h1>
+        </div>
+
+    <div class="col-lg-8">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            设备UID白名单
+                        </div>
+                        <!-- /.panel-heading -->
+                        <div class="panel-body">
+                            <!-- Nav tabs -->
+                            <ul class="nav nav-tabs">
+                                <li class="active"><a href="#uidselect" data-toggle="tab">查询</a>
+                                </li>
+                                <li><a href="#uidadd" data-toggle="tab">添加</a>
+                                </li>
+                                <li><a href="#uiddel" data-toggle="tab">删除</a>
+                            </ul>
+
+                            <!-- Tab panes -->
+                            <div class="tab-content">
+                                <div class="tab-pane fade in active" id="uidselect">
+                                    <br/>
+                                    <h4>查询uid白名单</h4>
+                                    <form class="form-inline"  action="/tools/newuser_uid/" method="get" role="form">
+                                        <div class="form-group"><input type="text" class="form-control input-lg" id="uid" placeholder="请输入uid" name="uid"></div>
+                                        <button type="button" id='uid_select' class="btn btn-info btn-lg" >查询</button>
+                                    </form>
+                                </div>
+                                <div class="tab-pane fade" id="uidadd">
+                                    <br/>
+                                    <h4>添加uid白名单</h4>
+                                    <form class="form-inline"  action="/tools/newuser_uidadd/" method="get" role="form">
+                                        <div class="form-group"><input type="text" class="form-control input-lg" id="uid1" placeholder="请输入uid" name="uid"></div>
+                                        <button type="button" id='uid_add' class="btn btn-info btn-lg" >添加</button>
+                                    </form>
+                                </div>
+                                <div class="tab-pane fade" id="uiddel">
+                                    <br/>
+                                    <h4>删除uid白名单</h4>
+                                    <form class="form-inline"  action="/tools/newuser_uiddel/" method="get" role="form">
+                                        <div class="form-group"><input type="text" class="form-control input-lg" id="uid2" placeholder="请输入uid" name="uid"></div>
+                                        <button type="button" id='uid_del' class="btn btn-info btn-lg" >删除</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- /.panel-body -->
+                    </div>
+
+
+                    <!-- /.panel -->
+                </div>
+
+
+    <div class="col-lg-8">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            账号USER ID白名单
+                        </div>
+                        <!-- /.panel-heading -->
+                        <div class="panel-body">
+                            <!-- Nav tabs -->
+                            <ul class="nav nav-tabs">
+                                <li class="active"><a href="useridselect" data-toggle="tab">查询</a>
+                                </li>
+                                <li><a href="#useridadd" data-toggle="tab">添加</a>
+                                </li>
+                                <li><a href="#useriddel" data-toggle="tab">删除</a>
+                            </ul>
+
+                            <!-- Tab panes -->
+                            <div class="tab-content">
+                                <div class="tab-pane fade in active" id="useridselect">
+                                    <br/>
+                                    <h4>查询userid白名单</h4>
+                                    <form class="form-inline"  action="/tools/newuser_userid/" method="get" role="form">
+                                        <div class="form-group"><input type="text" class="form-control input-lg" id="userid" placeholder="请输入userid" name="userid"/></div>
+                                        <!--<input type="submit" class="btn btn-lg btn-default" id="submit" value="查询" onclick=""/>-->
+                                        <button type="button" id='userid_select' class="btn btn-info btn-lg" >查询</button>
+                                    </form>
+
+                                </div>
+                                <div class="tab-pane fade" id="useridadd">
+                                    <br/>
+                                    <h4>添加userid白名单</h4>
+                                    <form class="form-inline"  action="/tools/newuser_useridadd/" method="get" role="form">
+                                        <div class="form-group"><input type="text" class="form-control input-lg" id="userid1" placeholder="请输入userid" name="userid"/></div>
+                                        <!--<button type="submit" class="btn btn-lg btn-default">Submit</button>-->
+                                        <!--<input type="submit" class="btn btn-lg btn-default" value="添加" onclick=""/>-->
+                                        <button type="button" id='userid_add' class="btn btn-info btn-lg" >添加</button>
+                                    </form>
+                                </div>
+                                <div class="tab-pane fade" id="useriddel">
+                                    <br/>
+                                    <h4>删除userid白名单</h4>
+                                    <form class="form-inline"  action="/tools/newuser_useriddel/" method="get" role="form">
+                                        <div class="form-group"><input type="text" class="form-control input-lg" id="userid2" placeholder="请输入userid" name="userid"></div>
+                                        <button type="button" id='userid_del' class="btn btn-info btn-lg" >删除</button>
+                                    </form>
+                                </div>
+                            </div>
+
+                        </div>
+                        <!-- /.panel-body -->
+                    </div>
+
+
+                    <!-- /.panel -->
+                </div>
+
+
+</div>
+<!--userid-->
+
+
+
+<script>
+    $(window).load(function(){
+      $("#userid_select").click(function(){
+        var userid = $("#userid").val();
+        $.get("/tools/newuser_userid/",{'userid':userid}, function(ret){
+            $('#userid_select').html(ret)
+        })
+      });
+    });
+</script>
+<script>
+    $(window).load(function(){
+      $("#userid_add").click(function(){
+        var userid1 = $("#userid1").val();
+        $.get("/tools/newuser_useridadd/",{'userid':userid1}, function(ret){
+            $('#userid_add').html(ret)
+        })
+      });
+    });
+</script>
+<script>
+    $(window).load(function(){
+      $("#userid_del").click(function(){
+        var userid2 = $("#userid2").val();
+        $.get("/tools/newuser_useriddel/",{'userid':userid2}, function(ret){
+            $('#userid_del').html(ret)
+        })
+      });
+    });
+</script>
+<!--uid-->
+<script>
+    $(window).load(function(){
+      $("#uid_select").click(function(){
+        var uid = $("#uid").val();
+        $.get("/tools/newuser_uid/",{'uid':uid}, function(ret){
+            $('#uid_select').html(ret)
+        })
+      });
+    });
+</script>
+<script>
+    $(window).load(function(){
+      $("#uid_add").click(function(){
+        var uid1 = $("#uid1").val();
+        $.get("/tools/newuser_uidadd/",{'uid':uid1}, function(ret){
+            $('#uid_add').html(ret)
+        })
+      });
+    });
+</script>
+<script>
+    $(window).load(function(){
+      $("#uid_del").click(function(){
+        var uid2 = $("#uid2").val();
+        $.get("/tools/newuser_uiddel/",{'uid':uid2}, function(ret){
+            $('#uid_del').html(ret)
+        })
+      });
+    });
+</script>
+{%endblock%}

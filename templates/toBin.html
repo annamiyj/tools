@@ -1,0 +1,67 @@
+{% extends "base.html" %}
+
+{%block title%}
+    ZX Tools
+{%endblock%}
+
+{%block myContent%}
+{{block.super}}
+
+
+    <div class="templatemo-content-container">
+
+                <div class="col-lg-12">
+                    <h1 class="page-header">logicBit 解析器</h1>
+                </div>
+
+                <div class="col-lg-12">
+                                <div class="tab-content">
+                                    <div class="tab-pane fade in active" id="toBin">
+                                        <form class="form-inline"  action="/tools/toBin/search/" method="get" role="form">
+                                            <div class="form-group"><input type="text" class="form-control input-lg" id="num" placeholder="请输入logicbit整数" name="num">
+                                            </div>
+                                            <button type="sumbit" id='name_submit' class="btn btn-info btn-lg" >查询</button>
+                                        </form>
+                                        <p class="text-warning">
+                                            {{abc}}
+                                        </p>
+                                    </div>
+                                </div>
+                </div>
+                <div class="col-lg-8">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            十进制转二进制
+                        </div>
+                        <!-- /.panel-heading -->
+                        <div class="panel-body">
+                            <div class="table-responsive">
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th>位数</th>
+                                            <th>说明</th>
+                                            <th>结果</th>
+                                        </tr>
+                                        {% for data in data %}
+                                        <tr  class="">
+                                            <td width="30%">{{data.No}}</td>
+                                            <td width="50%">{{data.enum}}</td>
+                                            <td width="30%"><strong>{{data.Num}}</strong></td>
+                                        </tr>
+                                        {% endfor %}
+                                    </thead>
+
+                                </table>
+                            </div>
+                            <!-- /.table-responsive -->
+                        </div>
+                        <!-- /.panel-body -->
+                    </div>
+                    <!-- /.panel -->
+                </div>
+
+    </div>
+
+
+{%endblock%}

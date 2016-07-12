@@ -1,0 +1,94 @@
+{% extends "base.html" %}
+
+{%block title%}
+    ZX Tools
+{%endblock%}
+
+{%block myContent%}
+{{block.super}}
+
+<div class="templatemo-content-container">
+    <div class="col-lg-8">
+        <h1 class="page-header">授信用户白名单</h1>
+    </div>
+
+    <div class="col-lg-8">
+            <div class="panel panel-default margin-10">
+            <div class="panel-heading"><h2 class="text-uppercase">授信用户-查询账号身份</h2></div>
+            <div class="panel-body">
+                          <form action="/tools/credituser_select/" class="templatemo-login-form" method="get" role="form">
+                            <div class="form-group">
+                              <label>通过userId、userName查询账号身份</label>
+                              <input type="text" class="form-control"  placeholder="请输入userid或者username" name="user_id" id="user_id">
+                            </div>
+                            <div class="form-group">
+                                <div class="checkbox squaredTwo">
+                                </div>
+                            </div>
+                              <p class="text-muted"><span id='result'></span></p>
+                            <div class="form-group">
+                              <button type="button" id="submit" class="templatemo-blue-button">提交</button>
+                            </div>
+                          </form>
+                        </div>
+        <br/>
+        </div>
+        </div>
+
+    <div class="col-lg-8">
+            <div class="panel panel-default margin-10">
+            <div class="panel-heading"><h2 class="text-uppercase">授信用户-更改账号身份</h2></div>
+            <div class="panel-body">
+                          <form action="/tools/credituser_update/" class="templatemo-login-form" method="get" role="form">
+                            <div class="form-group">
+                              <label>输入userid和账号身份类型（1：授信，2：非授信）</label>
+                              <input type="text" class="form-control"  placeholder="请输入userid或者username" name="user_id" id="user_id">
+                            </div>
+                            <div class="margin-right-15 templatemo-inline-block">
+                                <label class="control-label">选择身份</label>
+                                <input type="radio" name="select" id="r1"  value="1" checked>
+                                <label for="r1" class="font-weight-400"><span></span> 授信</label>
+                                <input type="radio" name="select" id="r2" value="2">
+                                <label for="r2" class="font-weight-400"><span></span> 非授信</label>
+
+                            </div>
+                            <div class="form-group">
+                                <div class="checkbox squaredTwo">
+                                </div>
+                            </div>
+                              <p class="text-muted"><span id='update_result'></span></p>
+                            <div class="form-group">
+                              <button type="button" id="update_submit" class="templatemo-blue-button">提交</button>
+                            </div>
+                              <a href="http://l-payserver12.pay.beta.cn6.qunar.com/pay/External/QueryLoginName.php" target="_blank"><h5>手机号查userid和username</h5></a>
+                          </form>
+                        </div>
+            <br/>
+            </div>
+            </div>
+
+
+</div>
+<script>
+    $(document).ready(function(){
+      $("#submit").click(function(){
+        var user_id = $("#user_id").val();
+        $.get("/tools/credituser_select/",{'user_id':user_id}, function(ret){
+            $('#result').html(ret)
+        })
+      });
+    });
+</script>
+<script>
+    $(document).ready(function(){
+      $("#update_submit").click(function(){
+        var user_id = $("#user_id").val();
+        var select = $("input[name='select']:checked").val();
+        $.get("/tools/credituser_update/",{'user_id':user_id,'select':select}, function(ret){
+            $('#update_result').html(ret)
+        })
+      });
+    });
+</script>
+{%endblock%}
+

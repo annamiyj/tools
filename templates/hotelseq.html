@@ -1,0 +1,91 @@
+{% extends "base.html" %}
+
+{%block title%}
+    ZX Tools
+{%endblock%}
+
+{%block myContent%}
+{{block.super}}
+
+
+    <div class="templatemo-content-container">
+        <div class="col-lg-12">
+            <h1 class="page-header">酒店seq转换工具</h1>
+        </div>
+
+        <div class="col-lg-8">
+            <div class="panel panel-default margin-10">
+            <div class="panel-heading"><h2 class="text-uppercase">seq to name</h2></div>
+            <div class="panel-body">
+                          <form action="/tools/seqtoname/" class="templatemo-login-form" method="get" role="form">
+                            <div class="form-group">
+                              <label>唯一匹配</label>
+                              <input type="text" class="form-control" id="seqtoname" placeholder="请输入hotelseq" name="seq">
+                            </div>
+                            <div class="form-group">
+                                <div class="checkbox squaredTwo">
+                                </div>
+                            </div>
+                              <p class="text-muted"><span id='name_result'></span></p>
+                            <div class="form-group">
+                              <button type="button" id="name_submit" class="templatemo-blue-button">查询</button>
+                            </div>
+                          </form>
+                        </div>
+        <br/>
+        </div>
+        </div>
+
+
+        <div class="col-lg-8">
+            <div class="panel panel-default margin-10">
+            <div class="panel-heading"><h2 class="text-uppercase">name to seq</h2></div>
+            <div class="panel-body">
+                          <form action="/tools/nametoseq/" class="templatemo-login-form" method="get" role="form">
+                            <div class="form-group">
+                              <label>模糊匹配，查询5条记录</label>
+                              <input type="text" class="form-control" id="nametoseq" placeholder="请输入酒店名称" name="name">
+                            </div>
+                            <div class="form-group">
+                                <div class="checkbox squaredTwo">
+                                </div>
+                            </div>
+                              <p class="text-muted"><span id='seq_result'></span></p>
+                            <div class="form-group">
+                              <button type="button" id="seq_submit" class="templatemo-blue-button">查询</button>
+                            </div>
+                          </form>
+
+                        </div>
+         <br/>
+        </div>
+        </div>
+    </div>
+
+
+<script>
+    $(document).ready(function(){
+      $("#name_submit").click(function(){
+        var seqtoname = $("#seqtoname").val();
+        $.get("/tools/seqtoname/",{'seq':seqtoname}, function(ret){
+            $('#name_result').html(ret)
+        })
+      });
+    });
+</script>
+<script>
+    $(document).ready(function(){
+      $("#seq_submit").click(function(){
+        var nametoseq = $("#nametoseq").val();
+        $.get("/tools/nametoseq/",{'name':nametoseq}, function(ret){
+            $('#seq_result').html(ret)
+        })
+      });
+    });
+</script>
+
+{%endblock%}
+
+
+
+
