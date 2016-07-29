@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+
+{% block title%}常用工具{% endblock %}
+
+{%block myContent%}
+
+ <div class="row">
+    <div class="col-lg-12">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                验证码查询
+            </div>
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-lg-6">
+                        <form role="form" action="/getverifycode/">
+                            <div class="form-group">
+                                <label>Mobile:</label>
+                                <input class="form-control" placeholder="请输入手机号" name="mobile" maxlength="11">
+                            </div>
+                            <div class="form-group">
+                                <label>Environment:</label>
+                                <div class="radio">
+                                    <label>
+                                        <input type="radio" name="environment" id="environment1" value="test" checked>test
+                                    </label>
+                                </div>
+                                <div class="radio">
+                                    <label>
+                                        <input type="radio" name="environment" id="environment2" value="sim">sim/online
+                                    </label>
+                                </div>
+                            </div>
+                            <button type="submit" class="btn btn-default">Submit</button>
+                            <button type="reset" class="btn btn-default">Reset</button>
+                            <br><br>
+                            {% if code %}
+                                <p>手机号：{{mobiles}}&nbsp&nbsp&nbsp&nbsp验证码：<font color="red"><strong>{{code}}</strong></font>&nbsp&nbsp&nbsp&nbsp发送时间：{{time}}</p>
+                            {% else %}
+                                <p>{{message}}</p>
+                            {% endif %}
+                        </form>
+                    </div>
+                    <!-- /.col-lg-6 (nested) -->
+                </div>
+                <!-- /.row (nested) -->
+            </div>
+            <!-- /.panel-body -->
+        </div>
+        <!-- /.panel -->
+    </div>
+    <!-- /.col-lg-12 -->
+</div>
+            <!-- /.row -->
+
+{%endblock%}

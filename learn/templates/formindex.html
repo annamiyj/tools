@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>验证码查询</title>
+</head>
+<body>
+
+<form method='post'>
+{% csrf_token %}
+
+<label>mobile:</label>{{form.mobile}} {{form.mobile.errors|safe}}</br></br>
+<label>environment:</label>
+{% for environment in form.environment %}
+   {{ environment }}
+{% endfor %}
+</br>
+</br>
+</br>
+
+
+<input type="submit" value="获取验证码" id="getverifycode">
+<br>
+<br>
+{% if code %}
+	<p>手机号：{{mobile}}&nbsp&nbsp验证码：<font color="red"><strong>{{code}}</strong></font>&nbsp&nbsp发送时间：{{time}}</p>
+{% else %}
+	<p>{{message}}</p>
+{% endif %}
+</form>
+
+</body>
+</html>
