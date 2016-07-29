@@ -56,28 +56,32 @@ from django.template import RequestContext
 def getverifycode(request):
     mobile = request.GET['mobile']
     environment = request.GET['environment']
-    if environment in ['test']:
-        scheme=MySqlConn().mysqlconntest("select a.phone,a.content,FROM_UNIXTIME(a.send_time) from jianzhi_crm.sms_send_log a where a.phone="+"'"+str(mobile)+"'"+" and a.service_id=106 order by a.send_time desc limit 1", "test")
-        # 无结果时
-        try:
-            code = scheme[0][1][-7:-1]
-            sendtime = scheme[0][2]
-            time = sendtime.strftime("%Y-%m-%d %H:%M:%S")
-            return render_to_response('form.html', locals())
-        except IndexError:
-            message = "未查询到验证码！"
-            return render_to_response('form.html', locals())
-    elif environment in ['sim']:
-        scheme=MySqlConn().mysqlconntest("select a.phone,a.content,FROM_UNIXTIME(a.send_time) from jianzhi_crm.sms_send_log a where a.phone="+"'"+str(mobile)+"'"+" and a.service_id=106 order by a.send_time desc limit 1", "sim")
-        # 无结果时
-        try:
-            code = scheme[0][1][-7:-1]
-            sendtime = scheme[0][2]
-            time = sendtime.strftime("%Y-%m-%d %H:%M:%S")
-            return render_to_response('form.html', locals())
-        except IndexError:
-            message = "未查询到验证码！"
-            return render_to_response('form.html', locals())
+    if mobile.isdigit():
+        if environment in ['test']:
+            scheme=MySqlConn().mysqlconntest("select a.phone,a.content,FROM_UNIXTIME(a.send_time) from jianzhi_crm.sms_send_log a where a.phone="+"'"+str(mobile)+"'"+" and a.service_id=106 order by a.send_time desc limit 1", "test")
+            # 无结果时
+            try:
+                code = scheme[0][1][-7:-1]
+                sendtime = scheme[0][2]
+                time = sendtime.strftime("%Y-%m-%d %H:%M:%S")
+                return render_to_response('form.html', locals())
+            except IndexError:
+                message = "未查询到验证码！"
+                return render_to_response('form.html', locals())
+        elif environment in ['sim']:
+            scheme=MySqlConn().mysqlconntest("select a.phone,a.content,FROM_UNIXTIME(a.send_time) from jianzhi_crm.sms_send_log a where a.phone="+"'"+str(mobile)+"'"+" and a.service_id=106 order by a.send_time desc limit 1", "sim")
+            # 无结果时
+            try:
+                code = scheme[0][1][-7:-1]
+                sendtime = scheme[0][2]
+                time = sendtime.strftime("%Y-%m-%d %H:%M:%S")
+                return render_to_response('form.html', locals())
+            except IndexError:
+                message = "未查询到验证码！"
+                return render_to_response('form.html', locals())
+    else:
+        message = "手机号格式不正确！"
+        return render_to_response('form.html', message)
 
 #django表单方法
 def getcode(request):
