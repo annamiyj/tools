@@ -27,6 +27,7 @@ urlpatterns = [
 #     url(r'^getcode/online/(\d{11})/$', learn_views.getcode_online, name='getcode_online'),
 
     url(r'^getverifycode/$', learn_views.getverifycode, name='getverifycode'),
-    url(r'^index/$', learn_views.index, name='index'),
-    url(r'^getcode/$', learn_views.getcode, name='getcode')
+    url(r'^$', learn_views.index, name='index'),
+    url(r'^getcode/$', learn_views.getcode, name='getcode'),
+    url(r'^newphone/$', learn_views.newphone, name='newphone'),
 ]
